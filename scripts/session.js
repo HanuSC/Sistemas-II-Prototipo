@@ -38,10 +38,10 @@ Session.pageAccess = function() {
         return false;
     }
 
-    console.log(Config.page_access, Config.page_access[this.loginInfo().position_name.toLowerCase()], window.location.pathname.replace("/", ""), !Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")));
+    const pathName = window.location.pathname.split("/")[2];
 
-    /*if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
-        window.location.href = "statistics.html";*/
+    if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(pathName))
+        window.location.href = "statistics.html";
 
     return true;
 }
