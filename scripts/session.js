@@ -1,0 +1,64 @@
+import DB from "./db.js";
+import Config from "./config.js";
+
+function Session() {}
+
+Session.local = {
+    advancedSelects: {},
+    storagedList: []
+};
+Session.add = function(data) {
+    if (data == null)
+        return false;
+
+    const [ [ key, value ] ] = Object.entries(data);
+    
+    localStorage.setItem(key.replaceAll("-", "_"), JSON.stringify(value));
+    Session.local.storagedList.push(key.replaceAll("-", "_"));
+}
+Session.get = function(name) {
+    return name == null ? false : JSON.parse(localStorage.getItem(name.replaceAll("-", "_")));
+}
+Session.loginInfo = function() {
+    if (!Session.manageLogin()) {
+        window.location.href = "login.html";
+        return false;
+    }
+
+    const logged = Session.get("logged");
+    return {
+        employee_name: logged.employee_name,
+        position: logged.position,
+        position_name: logged.position_name
+    };
+}
+Session.pageAccess = function() {
+    if (!Session.manageLogin()) {
+        window.location.href = "login.html";
+        return false;
+    }
+
+    if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
+        window.location.href = "statistics.html";
+
+    return true;
+}
+Session.manageLogin = function() {
+    if (Session.get("logged") == null)
+        return false;
+
+    const logged = Session.get("logged");
+    const currentDate = new Date();
+    const givenDate = logged.login_date;
+    const diff = Math.abs((currentDate.getTime() - parseFloat(givenDate)) / 1000);
+
+    if (diff < 10*60) {
+        logged.login_date = currentDate.getTime();
+        Session.add({ logged });
+        return true;
+    }
+    Session.add({ logged: null });
+    return false;
+}
+
+export default Session;

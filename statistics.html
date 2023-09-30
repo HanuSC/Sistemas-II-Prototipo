@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/css/fontawesome.css">
+    <link rel="stylesheet" href="styles/css/brands.css">
+    <link rel="stylesheet" href="styles/css/solid.css">
+    <link rel="stylesheet" href="styles/css/regular.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <!-- Scripts -->
+    <script src="scripts/general.js" type="module"></script>
+    <script src="scripts/statistics.js" type="module"></script>
+    <title>UCLA Prototype | Resumen</title>
+</head>
+<body>
+    <header>
+        <div class="page-header-wrapper flex-wrap">
+            <div class="btn-open-menu-wrapper flex-wrap"><button type="button" id="btn-open-menu"><i class="fa-solid fa-bars"></i></button></div>
+            <div class="page-header-options-wrapper flex-wrap">
+                <div class="user-options-wrapper flex-wrap">
+                    <button type="button" id="btn-perfil"><i class="fa-solid fa-circle-user"></i></button>
+                    <p><span id="user-name" class="user-name"></span><span id="user-role" class="user-role"></span></p>
+                    <a href="logout.html" id="btn-logout" class="flex-wrap btn-logout"><i class="fa-solid fa-sign-out"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-wrap">
+        <nav id="nav-menu" class="page-nav flex-wrap hide"></nav>
+        <section id="content" class="content">
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
