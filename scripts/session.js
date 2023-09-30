@@ -38,7 +38,7 @@ Session.pageAccess = function() {
         return false;
     }
 
-    console.log(Config.page_access, Config.page_access[this.loginInfo().position_name.toLowerCase()], window.location.pathname.replace("/", ""), !Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", ""));
+    console.log(Config.page_access, Config.page_access[this.loginInfo().position_name.toLowerCase()], window.location.pathname.replace("/", ""), !Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")));
 
     /*if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
         window.location.href = "statistics.html";*/
