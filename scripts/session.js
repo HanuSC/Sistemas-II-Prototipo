@@ -38,8 +38,9 @@ Session.pageAccess = function() {
         window.location.href = "login.html";
         return false;
     }
-
+    console.log(window.location.pathname);
     if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
+        
         window.location.href = this.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
 
     return true;
