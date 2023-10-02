@@ -39,12 +39,9 @@ Session.pageAccess = function() {
         window.location.href = "login.html";
         return false;
     }
-    console.log(window.location.pathname.replace("/", ""));
-    console.log(Config.page_access[this.loginInfo().position_name.toLowerCase()]);
-    setTimeout(() => {
-        console.log('out')
-    }, 5000);
-    if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
+    const arregloChiguire = window.location.pathname.split("/")[1];
+    console.log(arregloChiguire)
+    if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace(`/${arregloChiguire}/`, "")))
         
         window.location.href = this.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
 
