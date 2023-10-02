@@ -71,6 +71,10 @@ ClientsTable.prototype.deleteRows = function(elements) {
         do parent = parent.parentElement; while (parent.tagName != "TR")
         return parent.dataset.rowId;
     };
+    
+    if (!elements.length || !confirm("Procederá a eliminar registros, ¿está seguro?"))
+        return;
+
     elements.forEach(ele => {
         const [ client_rif  ] = findRowId(ele).split("+");
         const condition = { client_rif };

@@ -71,6 +71,10 @@ UsersTable.prototype.deleteRows = function(elements) {
         do parent = parent.parentElement; while (parent.tagName != "TR")
         return parent.dataset.rowId;
     };
+    
+    if (!elements.length || !confirm("Procederá a eliminar registros, ¿está seguro?"))
+        return;
+
     elements.forEach(ele => {
         const [ user_id  ] = findRowId(ele).split("+");
         const condition = { user_id };

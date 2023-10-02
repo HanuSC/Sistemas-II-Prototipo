@@ -5,7 +5,7 @@ DB.ini();
 
 document.addEventListener("DOMContentLoaded", function() {
     if (Session.manageLogin())
-        window.location = "statistics.html";
+        window.location = Session.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
 
     new FormLogin();
 });

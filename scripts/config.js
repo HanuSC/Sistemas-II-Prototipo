@@ -4,8 +4,8 @@ const config =  {
     rows_number: 10,
     management_form_id: "management-form",
     page_access: {
-        administrador: ["statistics.html", "calendar.html", "collection-tables.html", "users.html", "clients.html", "inbox.html"],
-        vendedor: ["statistics.html", "calendar.html", "collection-tables.html", "inbox.html"]
+        administrador: ["statistics.html", "calendar.html", "collection-tables.html", "users.html"],
+        vendedor: ["calendar.html", "collection-tables.html"]
     }
 };
 

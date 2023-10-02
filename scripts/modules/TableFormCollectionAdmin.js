@@ -7,7 +7,7 @@ function TableFormCollectionAdmin({ formMode, rowId, tableObject } = {}) {
         formMode,
         rowId,
         tableObject,
-        condition: [ "user_id", "invoice_number", "client_rif" ],
+        condition: [ "invoice_number" ],
         upperFields: [ "user_id", "invoice_number", "client_rif" ],
         uncheckFields: [ ]
     });

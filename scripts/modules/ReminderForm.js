@@ -1,8 +1,8 @@
-import DB from "../db";
-import Session from "../session";
+import DB from "../db.js";
+import Session from "../session.js";
 import AdvancedSelect from "./AdvancedSelect.js";
-import EventAssign from "./EventAssign";
-import Config from "../config";
+import EventAssign from "./EventAssign.js";
+import Config from "../config.js";
 import FloatingMessage from "./FloatingMessage.js";
 
 function ReminderForm(parentComponent) {
@@ -37,7 +37,7 @@ ReminderForm.prototype.ini = function(parentComponent) {
         } else if (selectName == "user_id") {
             const options = [
                 element.name.includes("filter") ? `<option value="none">Sin especificar</option>` : "",
-                ...DB.get({ table: "employees" }).map(({ user_id }) => `<option value="${user_id}">${user_id}</option>`)
+                ...DB.get({ table: "employees", condition: { position: 1 }, all: true }).map(({ user_id }) => `<option value="${user_id}">${user_id}</option>`)
             ];
             element.innerHTML = options.join("");
         }
@@ -225,7 +225,8 @@ ReminderForm.prototype.send = function() {
             to_user_id: data.user_id,
             by_user_id: Session.get("logged").user_id,
             message: data.message,
-            execute_date: data.execute_date
+            execute_date: data.execute_date,
+            title: data.title
         };
         id = DB.get({ table: "reminders" }).reduce((acc, cur) => {
             return parseInt(cur.id) > acc ? parseInt(cur.id) : acc;

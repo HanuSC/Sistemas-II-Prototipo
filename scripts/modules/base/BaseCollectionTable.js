@@ -53,7 +53,7 @@ BaseCollectionTable.prototype.start = function({ tableHtml, formHtml, tableCompo
         } else if (selectName == "user_id") {
             const options = [
                 element.name.includes("filter") ? `<option value="none">Sin especificar</option>` : "",
-                ...DB.get({ table: "employees" }).map(({ user_id }) => `<option value="${user_id}">${user_id}</option>`)
+                ...DB.get({ table: "employees", condition: { position: 1 }, all: true }).map(({ user_id }) => `<option value="${user_id}">${user_id}</option>`)
             ];
             element.innerHTML = options.join("");
         }
@@ -124,6 +124,10 @@ BaseCollectionTable.prototype.deleteRows = function(elements) {
         do parent = parent.parentElement; while (parent.tagName != "TR")
         return parent.dataset.rowId;
     };
+    
+    if (!elements.length || !confirm("Procederá a eliminar registros, ¿está seguro?"))
+        return;
+
     elements.forEach(ele => {
         const [ user_id, invoice_number, client_rif ] = findRowId(ele).split("+");
         DB.delete({ table: this.DBTable, condition: { user_id, invoice_number, client_rif } });

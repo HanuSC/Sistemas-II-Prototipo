@@ -89,14 +89,20 @@ FormLogin.prototype.send = function() {
         return;
     }
 
+
     const date = new Date();
     const accessInfo = DB.get({ table: "user_access", condition: this.compoundedData() })
-    const employeeInfo = DB.get({ table: "employees", condition: { user_id: this.compoundedData().user_id } })
-    const positionInfo = DB.get({ table: "positions", condition: { id: employeeInfo.position } })
-    
-    if (accessInfo == null)
-        return;
+    let employeeInfo, positionInfo;
 
+    if (accessInfo == null) {
+        FloatingMessage.say("Los datos no coinciden con ningún usuario", "error");
+        return;
+    }
+
+    employeeInfo = DB.get({ table: "employees", condition: { user_id: this.compoundedData().user_id } })
+    positionInfo = DB.get({ table: "positions", condition: { id: employeeInfo.position } })
+
+    
     Session.add({
         logged: {
             login_date: date.getTime(),

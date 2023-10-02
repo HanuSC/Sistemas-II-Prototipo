@@ -7,7 +7,7 @@ function TableFormCollectionSeller({ formMode, rowId, tableObject } = {}) {
         formMode,
         rowId,
         tableObject,
-        condition: [ "user_id", "invoice_number", "client_rif" ],
+        condition: [ "invoice_number" ],
         upperFields: [ "user_id", "invoice_number", "client_rif" ],
         uncheckFields: [ ]
     });
@@ -42,18 +42,48 @@ TableFormCollectionSeller.prototype.send = function() {
     if (!this.checkData(dataElements))
         return false;
 
-    const data = this.compoundedData()
+    const data = this.compoundedData();
     const dataInDb = DB.get({ table: this.table.DBTable, condition: this.rowIdCondition });
     const hadChanges = Object.entries(data).some(([key, value]) => dataInDb[key] != value);
-
+    
     if (hadChanges) {
+        // Verificamos que no exista un registro con el mismo invoice_number en estado pendiente.
+        const inDB = DB.get({ table: "collection_tables_changes", condition: { ...this.rowIdCondition, change_status: 1 } });
+        if (inDB != undefined) {
+            // Actualizamos
+            const result = DB.post({
+                table: "collection_tables_changes",
+                data,
+                condition: { ...this.rowIdCondition, change_status: 1 }
+            });
+            if (result) {
+                this.table.contentManager.update();
+                this.table.pagination.update();
+    
+                FloatingMessage.say("Solicitud guardada satisfactoriamente", "success");
+                this.close();
+                return;
+            }
+
+            return;
+        }
+
         // Preparamos la data
         Object.entries(data).forEach(([key, value]) => dataInDb[key] = value);
         const id = DB.get({ table: "collection_tables_changes" }).reduce((acc, cur) => {
             return parseInt(cur.id) > acc ? parseInt(cur.id) : acc;
         }, 0) + 1;
+        let request_date = new Date();
         // Insertamos
-        result = DB.put({ table: "collection_tables_changes", data: { id, change_status: "1", ...dataInDb } });
+        const result = DB.put({
+            table: "collection_tables_changes",
+            data: {
+                id,
+                request_date: `${request_date.getFullYear()}-${request_date.getMonth() + 1}-${request_date.getDate()}`,
+                change_status: 1,
+                ...dataInDb
+            }
+        });
         if (result) {
             this.table.contentManager.update();
             this.table.pagination.update();

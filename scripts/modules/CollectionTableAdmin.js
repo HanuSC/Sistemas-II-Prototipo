@@ -1,4 +1,4 @@
-import BaseCollectionTable from "./base/BaseCollectionTable";
+import BaseCollectionTable from "./base/BaseCollectionTable.js";
 import TableFormCollection from "./TableFormCollectionAdmin.js";
 import TableContentCollection from "./TableContentCollectionAdmin.js";
 
@@ -73,10 +73,10 @@ function CollectionTableAdmin() {
                             <th>Nro Factura</th>
                             <th>Vendedor</th>
                             <th>RIF Cliente</th>
-                            <th>Cliente</th>
                             <th>Monto $</th>
                             <th>Monto BsD</th>
                             <th>Deuda rst.</th>
+                            <th>Tasa</th>
                             <th>Tipo de pago</th>
                             <th>Estado</th>
                             <th>Fecha de expiración</th>
@@ -118,15 +118,8 @@ function CollectionTableAdmin() {
                         <select name="user-id" id="user-id" data-object-id="select-user-id"></select>
                     </div>
                     <div class="box">
-                        <label for="client-rif">Cliente</label>
-                        <div id="select-client-rif" data-select-id="client-rif" class="advanced-select">
-                            <div class="flex-wrap option-text-wrapper">
-                                <span class="option-text"></span>
-                                <span class="option-menu-btn flex-wrap"><i class="fa-solid fa-angle-down"></i></span>
-                            </div>
-                            <ul class="menu"></ul>
-                        </div>
-                        <select name="client-rif" id="client-rif" data-object-id="select-client-rif"></select>
+                        <label for="">Cliente</label>
+                        <input type="text" name="client-rif" placeholder="Ej.: J-0000000">
                     </div>
                 </div>
                 <div class="box-doble flex-wrap">

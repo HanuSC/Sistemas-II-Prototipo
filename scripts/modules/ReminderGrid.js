@@ -1,4 +1,5 @@
 import DB from "../db.js";
+import Session from "../session.js";
 
 function ReminderGrid(tableObject) {
     this.element = null;
@@ -73,7 +74,6 @@ ReminderGrid.prototype.goNextMonth = function () {
 }
 ReminderGrid.prototype.renderDays = function(monthNumber) {
     const html = [];
-    const user_id = this.tableObject.sellerId;
     let allCollectionTables = DB.get({ table: "collection_tables" });
     let allReminders = DB.get({ table: "reminders" });
     
@@ -90,7 +90,7 @@ ReminderGrid.prototype.renderDays = function(monthNumber) {
         allReminders.forEach(({ execute_date }) => reminders = execute_date == date ? reminders + 1 : reminders);
 
         html.push(`
-            <div class="day-wrapper">
+            <div class="day-wrapper flex-wrap" data-date="${date}">
                 <span class="day-text flex-wrap">${i}</span>
                 <div class="day-info">
                     <p class="day-notice flex-wrap">
@@ -98,12 +98,17 @@ ReminderGrid.prototype.renderDays = function(monthNumber) {
                         </i><span class="lore">Deudas expiran:</span>
                         <span class="number">${debts}</span>
                     </p>
-                    <p class="day-notice flex-wrap">
-                        <i class="fa-solid fa-bell"></i>
-                        <span class="lore">Recordatorios:</span>
-                        <span class="number">${reminders}</span>
-                    </p>
+                    ${
+                        Session.loginInfo().position == 0
+                        ? `<p class="day-notice flex-wrap">
+                            <i class="fa-solid fa-clock"></i>
+                            <span class="lore">Recordatorios:</span>
+                            <span class="number">${reminders}</span>
+                        </p>`
+                        : ""
+                    }
                 </div>
+                <button type="button" class="see-detail">Ver detalle</button>
             </div>
         `);
     }

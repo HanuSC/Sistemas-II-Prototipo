@@ -54,7 +54,10 @@ PageNav.prototype.render = function() {
             
         return null;
     });
-    this.menuElement.innerHTML = `<ul>${list.filter(e => e).join("")}</ul>`;
+    this.menuElement.innerHTML = `
+        <ul>${list.filter(e => e).join("")}</ul>
+        <div class="logo-wrapper"><img src="img/logo.jpg"></div>
+    `;
 }
 PageNav.prototype.assignEvents = function() {
     // Update/Reset visual

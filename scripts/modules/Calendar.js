@@ -1,15 +1,17 @@
 import DB from "../db.js";
 import EventAssign from "./EventAssign.js";
+import Session from "../session.js";
 import ReminderForm from "./ReminderForm.js";
 import ReminderGrid from "./ReminderGrid.js";
 import TableContentReminder from "./TableContentReminder.js";
-import TablePagination from "./TablePagination.js";
+import ReminderModalDay from "./ReminderModalDay.js";
 
 function Calendar() {
     this.element = null;
     this.grid = null;
     this.managementForm = null;
     this.contentManager = null;
+    this.modalDay = null;
     this.sellerId = null;
     this.filters = {};
     this.DBTable = "reminders";
@@ -23,10 +25,26 @@ Calendar.prototype.ini = function() {
         this.filters[ele.name.replaceAll(/\-/g, "_")] = ele;
     });
     this.grid = new ReminderGrid(this);
-    //this.pagination = new TablePagination(this);
+    if (Session.loginInfo().position == 1)
+        this.sellerId = Session.loginInfo().user_id;
     this.assignEvents();   
 }
 Calendar.prototype.assignEvents = function() {
+    EventAssign.add({
+        eventType: "click",
+        target: ".day-wrapper .see-detail",
+        callback: (event) => {
+            const findDate = (e) => {
+                let parent = e;
+                do parent = parent.parentElement; while (parent.dataset.date == null);
+
+                return parent.dataset.date;
+            };
+
+            this.modalDay = new ReminderModalDay({ date: findDate(event.target), sellerId: this.sellerId });
+            this.modalDay.open();
+        }
+    });
     EventAssign.add({
         eventType: "change",
         origin: document.getElementById("filter-user-id"),
@@ -72,6 +90,10 @@ Calendar.prototype.deleteRows = function(elements) {
         do parent = parent.parentElement; while (parent.tagName != "TR")
         return parent.dataset.rowId;
     };
+    
+    if (!elements.length || !confirm("Procederá a eliminar registros, ¿está seguro?"))
+        return;
+
     elements.forEach(ele => {
         DB.delete({ table: this.DBTable, condition: { id: findRowId(ele) } });
     });

@@ -5,10 +5,8 @@ import Calendar from "./modules/Calendar.js"
 
 document.addEventListener("DOMContentLoaded", function() {
     Session.pageAccess();
-    if (Session.loginInfo().position == 1) {
-        console.log("soy vendedor")
+    if (Session.loginInfo().position == 1)
         document.getElementById("top-lateral").style.display = "none";
-    }
 
     const sUserId = document.querySelector("#filter-user-id");
 
@@ -23,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     } else if (selectName == "user_id") {
         const options = [
             sUserId.name.includes("filter") ? `<option value="none">Sin especificar</option>` : "",
-            ...DB.get({ table: "employees" }).map(({ user_id }) => `<option value="${user_id}">${user_id}</option>`)
+            ...DB.get({ table: "employees", condition: { position: 1 }, all: true }).map(({ user_id }) => `<option value="${user_id}">${user_id}</option>`)
         ];
         sUserId.innerHTML = options.join("");
     }

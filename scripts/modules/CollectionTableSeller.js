@@ -1,4 +1,4 @@
-import BaseCollectionTable from "./base/BaseCollectionTable";
+import BaseCollectionTable from "./base/BaseCollectionTable.js";
 import TableFormCollection from "./TableFormCollectionSeller.js";
 import TableContentCollection from "./TableContentCollectionSeller.js";
 
@@ -68,10 +68,10 @@ function CollectionTableSeller() {
                             <th><button type="button" id="select-all-rows" class="btn-select-all-rows" data-selected="0"><i class="fa-regular fa-square"></i></button></th>
                             <th>Nro Factura</th>
                             <th>RIF Cliente</th>
-                            <th>Cliente</th>
                             <th>Monto $</th>
                             <th>Monto BsD</th>
                             <th>Deuda rst.</th>
+                            <th>Tasa</th>
                             <th>Tipo de pago</th>
                             <th>Estado</th>
                             <th>Fecha de expiración</th>
@@ -92,20 +92,15 @@ function CollectionTableSeller() {
         <div class="management-wrapper">
             <h2></h2>
             <div class="inside-wrapper">
-                <div class="box">
-                    <label for="">Nro Factura</label>
-                    <input type="text" name="invoice-number" placeholder="Ej.: FAC000">
-                </div>
-                <div class="box">
-                    <label for="client-rif">Cliente</label>
-                    <div id="select-client-rif" data-select-id="client-rif" class="advanced-select">
-                        <div class="flex-wrap option-text-wrapper">
-                            <span class="option-text"></span>
-                            <span class="option-menu-btn flex-wrap"><i class="fa-solid fa-angle-down"></i></span>
-                        </div>
-                        <ul class="menu"></ul>
+                <div class="box-doble flex-wrap first">
+                    <div class="box">
+                        <label for="">Nro Factura</label>
+                        <input type="text" name="invoice-number" placeholder="Ej.: FAC000">
                     </div>
-                    <select name="client-rif" id="client-rif" data-object-id="select-client-rif"></select>
+                    <div class="box">
+                        <label for="">Cliente</label>
+                        <input type="text" name="client-rif" placeholder="Ej.: J-0000000">
+                    </div>
                 </div>
                 <div class="box-doble flex-wrap">
                     <div class="box">

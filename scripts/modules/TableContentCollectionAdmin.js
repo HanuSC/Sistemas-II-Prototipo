@@ -21,14 +21,7 @@ TableContentCollectionAdmin.prototype.prepareData = function() {
     // Nivel 1: Vendedor
     if (filters.filter_user_id != "") {
         data = data.filter(row => {
-            const client_name = DB.get({ table: "clients", condition: { client_rif: row.client_rif } });
-            const full_data_row = {
-                ...row,
-                client_name: client_name == null ? "" : client_name.client_name,
-                payment_type: DB.interpolate({ type: "payment_type", value: row.payment_type }),
-                debt_status: DB.interpolate({ type: "debt_status", value: row.debt_status })
-            };
-            return new RegExp(filters.filter_user_id, "i").test(full_data_row.user_id);
+            return new RegExp(filters.filter_user_id, "i").test(row.user_id);
         })
     }
     // Nivel 2: Fecha de creación
@@ -46,10 +39,8 @@ TableContentCollectionAdmin.prototype.prepareData = function() {
     // Nivel 4: Palabra clave
     if (filters.filter_keyword != "") {
         data = data.filter(row => {
-            const client_name = DB.get({ table: "clients", condition: { client_rif: row.client_rif } });
             const full_data_row = {
                 ...row,
-                client_name: client_name == null ? "" : client_name.client_name,
                 payment_type: DB.interpolate({ type: "payment_type", value: row.payment_type }),
                 debt_status: DB.interpolate({ type: "debt_status", value: row.debt_status })
             };
@@ -69,24 +60,22 @@ TableContentCollectionAdmin.prototype.fillTable = function(page = 1) {
     /* Filling */
 
     this.data.slice(rowPageIndex, rowPageIndex + Config.rows_number).forEach(row => {
-        const client_name = DB.get({ table: "clients", condition: { client_rif: row.client_rif } });
         const full_data_row = {
             ...row,
-            client_name: client_name == null ? "" : client_name.client_name,
             payment_type: DB.interpolate({ type: "payment_type", value: row.payment_type }),
             debt_status: DB.interpolate({ type: "debt_status", value: row.debt_status })
         };
         
         tbody += `
-            <tr data-row-id="${full_data_row.user_id}+${full_data_row.invoice_number}+${full_data_row.client_rif}">
+            <tr data-row-id="${full_data_row.invoice_number}">
                 <td><button type="button" class="btn-select-row" data-selected="0"><i class="fa-regular fa-square"></i></button></td>
                 <td>${full_data_row.invoice_number}</td>
                 ${Session.loginInfo().position == 0 ? `<td>${full_data_row.user_id}</td>` : ""}                
                 <td>${full_data_row.client_rif}</td>
-                <td>${full_data_row.client_name}</td>
                 <td>${full_data_row.dollar_amount}</td>
                 <td>${full_data_row.bolivar_amount}</td>
                 <td>${full_data_row.remaining_debt}</td>
+                <td>${full_data_row.exchange_rate}</td>
                 <td>${full_data_row.payment_type}</td>
                 <td>${full_data_row.debt_status}</td>
                 <td>${full_data_row.expiration_date}</td>

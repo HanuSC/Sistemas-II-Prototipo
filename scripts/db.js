@@ -169,7 +169,7 @@ DB.data = {
         },
         {
             "user_id": "28204620",
-            "invoice_number": "FAC127",
+            "invoice_number": "FAC128",
             "client_rif": "J-12345623",
             "exchange_rate": "33",
             "dollar_amount": "680",
@@ -183,7 +183,7 @@ DB.data = {
         },
         {
             "user_id": "28204620",
-            "invoice_number": "FAC127",
+            "invoice_number": "FAC129",
             "client_rif": "J-12345615",
             "exchange_rate": "33",
             "dollar_amount": "200",
@@ -197,7 +197,7 @@ DB.data = {
         },
         {
             "user_id": "28204620",
-            "invoice_number": "FAC127",
+            "invoice_number": "FAC130",
             "client_rif": "J-12345647",
             "exchange_rate": "33",
             "dollar_amount": "1000",
@@ -211,7 +211,7 @@ DB.data = {
         },
         {
             "user_id": "28204620",
-            "invoice_number": "FAC127",
+            "invoice_number": "FAC131",
             "client_rif": "J-12345692",
             "exchange_rate": "33",
             "dollar_amount": "5000",
@@ -231,7 +231,7 @@ DB.data = {
             "user_id": "28204620",
             "invoice_number": "FAC125",
             "client_rif": "J-12345671",
-            "exchange_rate": "33",
+            "exchange_rate": "355",
             "dollar_amount": "3000",
             "bolivar_amount": "4200000",
             "remaining_debt": "0",
@@ -248,6 +248,7 @@ DB.data = {
             "id": "0",
             "to_user_id": "28204620",
             "by_user_id": "28019240",
+            "title": "hola",
             "message": "mensaje de recordatorio, alguna cosa",
             "execute_date": "2023-9-28"
         }
@@ -372,16 +373,20 @@ DB.getIndex = function({ table, condition }) {
 DB.interpolate = function({ type, value }) {
     return DB.get({ table: "relations" })[type][value];
 }
-DB.get = function({ table, condition, key }) {
+DB.get = function({ table, condition, key, all = false }) {
     if (!DB.initialized)
         return DB.ini();
     
     let data = JSON.parse(localStorage.getItem("data"));
 
-    if (Array.isArray(data[table]))
-        data = condition != undefined ? data[table][DB.getIndex({ table, condition })] : data[table];
-    else {
-        data = key != undefined ? data[table][key] : data[table];
+    if (all) {
+        data = data[table].filter((row) => Object.entries(condition).every(([key, value]) => row[key] == value));
+    } else {
+        if (Array.isArray(data[table]))
+            data = condition != undefined ? data[table][DB.getIndex({ table, condition })] : data[table];
+        else {
+            data = key != undefined ? data[table][key] : data[table];
+        }
     }
 
     return data;
@@ -404,9 +409,7 @@ DB.put = function({ table, data }) {
 
     const condition = {
         collection_tables: (data) => ({
-            user_id: data.user_id,
-            invoice_number: data.invoice_number,
-            client_rif: data.client_rif
+            invoice_number: data.invoice_number
         }),
         user_access: (data) => ({
             user_id: data.user_id
@@ -424,7 +427,8 @@ DB.put = function({ table, data }) {
             client_rif: data.client_rif
         }),
         collection_tables_changes: (data) => ({
-            id: data.id
+            invoice_number: data.invoice_number,
+            change_status: data.change_status
         })
     }[table](data);
 

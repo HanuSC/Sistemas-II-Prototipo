@@ -111,7 +111,7 @@ TablePagination.prototype.determinePageIndex = function(n = null) {
 	return newPageIndex ? newPageIndex : 1;
 }
 TablePagination.prototype.prepareButtons = function() {
-    const totalRows = this.table.data.length;
+    const totalRows = this.table.data == null ? this.table.contentManager.data.length : this.table.data.length;
     const totalPagesNumber = Math.ceil(totalRows / Config.rows_number);
     const paginationButtons = new PaginationButtons({ totalPagesNumber, pageIndex: this.pageIndex });
 

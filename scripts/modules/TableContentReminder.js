@@ -179,7 +179,7 @@ TableContentReminder.prototype.fillTable = function(page = 1) {
                 <td>${row.by_user_id}</td>
                 <td>${row.to_user_id}</td>
                 <td>${row.message}</td>
-                <td>${row.execute_date}</td>    
+                <td>${row.execute_date}</td>
                 <td class="options">
                     <button type="button" class="btn-delete-row"><i class="fa-solid fa-trash"></i></button> 
                 </td>

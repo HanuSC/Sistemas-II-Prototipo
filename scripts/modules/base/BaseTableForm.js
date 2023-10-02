@@ -23,8 +23,6 @@ BaseTableForm.prototype.start = function(tableObject, condition, upperFields, un
     if (tableObject == null)
         return;
 
-        
-        console.log(tableObject)
     if (this.rowId != null) {
         let splitedRowId = this.rowId.split("+");
         condition.forEach((key, index) => this.rowIdCondition[key] = splitedRowId[index]);
@@ -142,16 +140,18 @@ BaseTableForm.prototype.clearForm = function() {
 }
 BaseTableForm.prototype.fillForm = function() {
     const data = DB.get({ table: this.table.DBTable, condition: this.rowIdCondition });
-    
     Object.entries(data).forEach(([key, value]) => {
         this.entries.textareas.forEach(ele => {
             if (ele.name.replaceAll("-", "_") == key) {
-                ele.textContent = value;
+                ele.value = value;
             }
         })
         this.entries.inputs.forEach(ele => {
             if (ele.name.replaceAll("-", "_") == key) {
-                ele.value = value;
+                if (ele.getAttribute("type").toLowerCase() == "date")
+                    ele.value = value.split("-").map(e => e.length > 1 ? e : "0"+e).join("-");
+                else
+                    ele.value = value;
             }
         });
         this.entries.selects.forEach(ele => {
@@ -212,7 +212,6 @@ BaseTableForm.prototype.compoundedData = function() {
     });
     this.entries.selects.forEach(ele => data[ele.name.replaceAll("-", "_")] = ele.value);
     this.entries.textareas.forEach(ele => data[ele.name.replaceAll("-", "_")] = ele.value);
-
 
     return data;
 }

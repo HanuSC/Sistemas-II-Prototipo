@@ -27,6 +27,7 @@ Session.loginInfo = function() {
 
     const logged = Session.get("logged");
     return {
+        user_id: logged.user_id,
         employee_name: logged.employee_name,
         position: logged.position,
         position_name: logged.position_name
@@ -38,10 +39,8 @@ Session.pageAccess = function() {
         return false;
     }
 
-    const pathName = window.location.pathname.split("/")[2];
-
-    if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(pathName))
-        window.location.href = "statistics.html";
+    if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
+        window.location.href = this.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
 
     return true;
 }
@@ -54,7 +53,7 @@ Session.manageLogin = function() {
     const givenDate = logged.login_date;
     const diff = Math.abs((currentDate.getTime() - parseFloat(givenDate)) / 1000);
 
-    if (diff < 10*60) {
+    if (diff < 20*60) {
         logged.login_date = currentDate.getTime();
         Session.add({ logged });
         return true;
