@@ -41,6 +41,9 @@ Session.pageAccess = function() {
     }
     console.log(window.location.pathname.replace("/", ""));
     console.log(Config.page_access[this.loginInfo().position_name.toLowerCase()]);
+    setTimeout(() => {
+        console.log('out')
+    }, 5000);
     if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
         
         window.location.href = this.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
