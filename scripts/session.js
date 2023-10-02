@@ -20,6 +20,7 @@ Session.get = function(name) {
     return name == null ? false : JSON.parse(localStorage.getItem(name.replaceAll("-", "_")));
 }
 Session.loginInfo = function() {
+
     if (!Session.manageLogin()) {
         window.location.href = "login.html";
         return false;
@@ -38,7 +39,8 @@ Session.pageAccess = function() {
         window.location.href = "login.html";
         return false;
     }
-    console.log(window.location.pathname);
+    console.log(window.location.pathname.replace("/", ""));
+    console.log(Config.page_access[this.loginInfo().position_name.toLowerCase()]);
     if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace("/", "")))
         
         window.location.href = this.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
