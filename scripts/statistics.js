@@ -4,6 +4,6 @@ import Statistics from "./modules/Statistics.js"
 
 document.addEventListener("DOMContentLoaded", function() {
     Session.pageAccess();
-
+    
     new Statistics();
 });

@@ -6,12 +6,13 @@ DB.ini();
 
 document.addEventListener("DOMContentLoaded", function() {
     if (!Session.manageLogin())
+        console.log('im here')
         window.location = "login.html";
 
     const { employee_name, position_name } = Session.loginInfo();
     document.getElementById("user-name").textContent = employee_name;
     document.getElementById("user-role").textContent = position_name;
-
+    console.log('im here')
     // Page Nav Menu
     new PageNav("nav-menu");
 
