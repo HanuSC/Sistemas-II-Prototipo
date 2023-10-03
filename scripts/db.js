@@ -1,14 +1,31 @@
 function DB() {}
 
 DB.data = {
-    relations: {
-        debt_status: ["Cancelada", "Pendiente", "Anulada"],
-        user_status: ["Activo", "Inactivo"],
-        change_status: ["Realizados", "Pendiente", "Descartados"],
-        payment_type: ["Contado", "Crédito"],
-        sex: ["Masculino", "Femenino"]
+    "relations": {
+        "debt_status": [
+            "Cancelada",
+            "Pendiente",
+            "Anulada"
+        ],
+        "user_status": [
+            "Activo",
+            "Inactivo"
+        ],
+        "change_status": [
+            "Realizados",
+            "Pendiente",
+            "Descartados"
+        ],
+        "payment_type": [
+            "Contado",
+            "Crédito"
+        ],
+        "sex": [
+            "Masculino",
+            "Femenino"
+        ]
     },
-    states: [
+    "states": [
         {
             "id": "0",
             "state_name": "Amazonas"
@@ -108,152 +125,102 @@ DB.data = {
         {
             "id": "24",
             "state_name": "Vargas"
-        },
+        }
     ],
-    collection_tables: [
+    "collection_tables": [
         {
-            "user_id": "28019240",
-            "invoice_number": "FAC124",
-            "client_rif": "J-12345678",
-            "exchange_rate": "33",
-            "dollar_amount": "3000",
-            "bolivar_amount": "4200000",
+            "invoice_number": "FAC006291",
+            "client_rif": "J-500568461",
+            "dollar_amount": "118,91",
+            "bolivar_amount": "2901,42",
             "remaining_debt": "0",
-            "payment_type": "0",
-            "debt_status": "0",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-7-10",
-            "expiration_date": "2023-9-30"
-        },
-        {
+            "exchange_rate": "24,40",
+            "expiration_date": "2023-10-20",
             "user_id": "28204620",
-            "invoice_number": "FAC125",
-            "client_rif": "J-12345671",
-            "exchange_rate": "33",
-            "dollar_amount": "3000",
-            "bolivar_amount": "4200000",
-            "remaining_debt": "0",
             "payment_type": "0",
-            "debt_status": "0",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-6-10",
-            "expiration_date": "2023-9-28"
+            "debt_status": "1",
+            "observation": "VENCIDA",
+            "creation_date": "2023-10-2"
         },
         {
-            "user_id": "28019240",
-            "invoice_number": "FAC126",
-            "client_rif": "J-12345672",
-            "exchange_rate": "33",
-            "dollar_amount": "3000",
-            "bolivar_amount": "4200000",
-            "remaining_debt": "0",
-            "payment_type": "0",
-            "debt_status": "0",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-5-10",
-            "expiration_date": "2023-9-30"
-        },
-        {
-            "user_id": "28019240",
-            "invoice_number": "FAC127",
-            "client_rif": "J-12345673",
-            "exchange_rate": "33",
-            "dollar_amount": "3000",
-            "bolivar_amount": "4200000",
-            "remaining_debt": "0",
-            "payment_type": "0",
-            "debt_status": "0",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-9-6",
-            "expiration_date": "2023-9-30"
-        },
-        {
+            "invoice_number": "FAC006292",
+            "client_rif": "J-303578888",
+            "dollar_amount": "297,91",
+            "bolivar_amount": "7225,18",
+            "remaining_debt": "50",
+            "exchange_rate": "24,31",
+            "expiration_date": "2023-10-15",
             "user_id": "28204620",
-            "invoice_number": "FAC128",
-            "client_rif": "J-12345623",
-            "exchange_rate": "33",
-            "dollar_amount": "680",
-            "bolivar_amount": "44500",
-            "remaining_debt": "0",
             "payment_type": "0",
             "debt_status": "0",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-9-6",
-            "expiration_date": "2023-9-30"
+            "observation": "El 09/19/2023 se abono 6402,74bs a la tasa 25,90bs el dólar. Fueron 247,21$, faltan 50$",
+            "creation_date": "2023-10-2"
         },
         {
-            "user_id": "28204620",
-            "invoice_number": "FAC129",
-            "client_rif": "J-12345615",
-            "exchange_rate": "33",
-            "dollar_amount": "200",
-            "bolivar_amount": "80000",
-            "remaining_debt": "0",
+            "invoice_number": "FAC006293",
+            "client_rif": "J-5235425461",
+            "dollar_amount": "301,37",
+            "bolivar_amount": "10306,17",
+            "remaining_debt": "100",
+            "exchange_rate": "34.2",
+            "expiration_date": "2023-10-26",
+            "user_id": "28316086",
             "payment_type": "1",
             "debt_status": "1",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-9-6",
-            "expiration_date": "2023-9-29"
+            "observation": "Pagaron 201 el 09/23/2023",
+            "creation_date": "2023-10-2"
         },
         {
-            "user_id": "28204620",
-            "invoice_number": "FAC130",
-            "client_rif": "J-12345647",
-            "exchange_rate": "33",
-            "dollar_amount": "1000",
-            "bolivar_amount": "150000",
+            "invoice_number": "FAC006294",
+            "client_rif": "J-123456780",
+            "dollar_amount": "50",
+            "bolivar_amount": "1750",
             "remaining_debt": "0",
-            "payment_type": "1",
-            "debt_status": "1",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-9-6",
-            "expiration_date": "2023-9-30"
-        },
-        {
-            "user_id": "28204620",
-            "invoice_number": "FAC131",
-            "client_rif": "J-12345692",
-            "exchange_rate": "33",
-            "dollar_amount": "5000",
-            "bolivar_amount": "4200",
-            "remaining_debt": "0",
-            "payment_type": "1",
+            "exchange_rate": "35",
+            "expiration_date": "2023-10-2",
+            "user_id": "28316086",
+            "payment_type": "0",
             "debt_status": "2",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-9-6",
-            "expiration_date": "2023-9-29"
+            "observation": "Regresaron la mercancía. ",
+            "creation_date": "2023-10-2"
         }
     ],
-    collection_tables_changes: [
+    "collection_tables_changes": [
         {
-            "id": "0",
-            "change_status": "1",
+            "id": 1,
+            "request_date": "2023-10-2",
+            "change_status": 1,
+            "invoice_number": "FAC006292",
+            "client_rif": "J-303578888",
+            "dollar_amount": "297,91",
+            "bolivar_amount": "7225,18",
+            "remaining_debt": "20",
+            "exchange_rate": "24,31",
+            "expiration_date": "2023-10-15",
             "user_id": "28204620",
-            "invoice_number": "FAC125",
-            "client_rif": "J-12345671",
-            "exchange_rate": "355",
-            "dollar_amount": "3000",
-            "bolivar_amount": "4200000",
-            "remaining_debt": "0",
             "payment_type": "0",
             "debt_status": "0",
-            "observation": "Pago adelantado",
-            "creation_date": "2023-6-10",
-            "expiration_date": "2023-9-30",
-            "request_date": "2023-9-28"
+            "observation": "El 09/19/2023 se abono 6402,74bs a la tasa 25,90bs el dólar. Fueron 247,21$, faltan 50$, Se abonaron 30$ el 10/02/2023 a la tasa de 35bs, en total 1050bs",
+            "creation_date": "2023-10-2"
         }
     ],
-    reminders: [
+    "reminders": [
         {
-            "id": "0",
+            "id": 1,
+            "to_user_id": "28316086",
+            "by_user_id": "28019240",
+            "message": "Atención a los retrasos ",
+            "execute_date": "2023-10-24"
+        },
+        {
+            "id": 2,
             "to_user_id": "28204620",
             "by_user_id": "28019240",
-            "title": "hola",
-            "message": "mensaje de recordatorio, alguna cosa",
-            "execute_date": "2023-9-28"
+            "message": "Deuda Cancelada",
+            "execute_date": "2023-10-19"
         }
     ],
-    employees: [
+    "employees": [
         {
             "user_id": "28019240",
             "name": "alirio",
@@ -272,14 +239,25 @@ DB.data = {
             "surname": "moreno",
             "phone_number": "+58123465975",
             "email": "antho@algo.com",
-            "sex": "1",
+            "sex": "0",
             "position": "1",
             "entry_date": "2023-8-14",
             "exit_date": "",
             "status": "0"
+        },
+        {
+            "name": "Hanuman",
+            "surname": "Sanchez",
+            "user_id": "28316086",
+            "phone_number": "+584240808912",
+            "email": "hanumansanchez@gmail.com",
+            "entry_date": "2023-02-17",
+            "exit_date": "",
+            "sex": "0",
+            "position": "1"
         }
     ],
-    user_access: [
+    "user_access": [
         {
             "user_id": "28019240",
             "password": "clave123",
@@ -289,9 +267,14 @@ DB.data = {
             "user_id": "28204620",
             "password": "clave123",
             "creation_date": "2023-9-14"
+        },
+        {
+            "user_id": "28316086",
+            "password": "clave123",
+            "creation_date": "2023-10-2"
         }
     ],
-    positions: [
+    "positions": [
         {
             "id": "0",
             "position_name": "Administrador"
@@ -301,49 +284,41 @@ DB.data = {
             "position_name": "Vendedor"
         }
     ],
-    clients: [
+    "clients": [
         {
             "client_rif": "J-12345678",
-            "client_name": "Farmacia Santander",
-            "state": "0"
+            "client_name": "Farmacia Santander"
         },
         {
             "client_rif": "J-12345671",
-            "client_name": "Farmacia San Cristobal",
-            "state": "1"
+            "client_name": "Farmacia San Cristobal"
         },
         {
             "client_rif": "J-12345672",
-            "client_name": "Farmacia San Agustin",
-            "state": "2"
+            "client_name": "Farmacia San Agustin"
         },
         {
             "client_rif": "J-12345673",
-            "client_name": "Farmacia Colondrina",
-            "state": "3"
+            "client_name": "Farmacia Colondrina"
         },
         {
             "client_rif": "J-12345623",
-            "client_name": "Farmacia Girasol",
-            "state": "4"
+            "client_name": "Farmacia Girasol"
         },
         {
             "client_rif": "J-12345615",
-            "client_name": "Farmatodo",
-            "state": "5"
+            "client_name": "Farmatodo"
         },
         {
             "client_rif": "J-12345647",
-            "client_name": "Farmacia San Ignacio",
-            "state": "6"
+            "client_name": "Farmacia San Ignacio"
         },
         {
             "client_rif": "J-12345692",
-            "client_name": "Farmacia Nuevo Siglo",
-            "state": "7"
+            "client_name": "Farmacia Nuevo Siglo"
         }
     ]
-};
+}
 
 DB.initialized = false;
 DB.ini = function() {
