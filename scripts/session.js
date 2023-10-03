@@ -40,7 +40,7 @@ Session.pageAccess = function() {
         return false;
     }
     const arregloChiguire = window.location.pathname.split("/")[1];
-    console.log(arregloChiguire)
+    // console.log(arregloChiguire)
     if (!Config.page_access[this.loginInfo().position_name.toLowerCase()].includes(window.location.pathname.replace(`/${arregloChiguire}/`, "")))
         
         window.location.href = this.loginInfo().position == 0 ? "statistics.html" : "collection-tables.html";
